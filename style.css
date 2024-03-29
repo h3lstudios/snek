@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'DINPro-Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro-Medium'), url('DINPro-Medium_13936.woff') format('woff');
+}
+
+.tomorrow-medium {
+    font-family: "Tomorrow", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.canvas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gameCanvas {
+    margin-right: 20px;
+}
+
+#scoreDisplay {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    font-family: 'Tomorrow', sans-serif;
+    font-weight: 300;
+}
+
+body {
+    font-family: DINPro-Medium, sans-serif;
+    background-color: #222;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#title {
+    font-size: 36px;
+    padding: 20px;
+}
+
+#options {
+    margin-top: 50px;
+}
+
+.option {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid #444;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    font-family: DINPro-Medium, sans-serif;
+    transition: background-color 0.3s;
+}
+
+.option:hover {
+    background-color: #333;
+}
+
+#loading {
+    font-size: 20px;
+    margin-top: 50px;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
+#title {
+    padding: 20px;
+}
+
+#title img {
+    width: 300px; /* Adjust size as needed */
+    height: auto;
+}
+
+#options {
+    margin-top: 50px;
+}
+
+.option {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #555;
+}
+
+#loading {
+    font-size: 20px;
+    margin-top: 50px;
+    display: none; /* Hide initially */
+}
+
+/* Initially hide the game options */
+.hidden {
+    display: none;
+}
+
+/* CSS transitions for smooth animation */
+#game-options {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Center the game options */
+#game-options {
+    text-align: center;
+}
+
+/* Initially hide the game options */
+.hidden {
+    display: none;
+}
+
+/* Animation for fading out settings and leaderboards */
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Animation for sliding down single player and multiplayer */
+.slide-down {
+    animation: slideDown 0.5s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
