@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error loading apple image:', error);
     };
 
+    const arrowSound = new Audio('assets/b1-025_menu-move_01.mp3');
     let snake = [];
     for (let i = 0; i < 5; i++) {
         snake.push({ x: 10 - i, y: 10 });
@@ -67,35 +68,48 @@ document.addEventListener('DOMContentLoaded', () => {
         return { x, y };
     }
 
+    let currentDirection = null;
     document.addEventListener('keydown', e => {
         switch (e.key) {
             case 'ArrowUp':
                 if (dy !== 1) {
                     dx = 0;
                     dy = -1;
+                    if (currentDirection !== 'up') { playArrowSound(); }
+                    currentDirection = 'up';
                 }
                 break;
             case 'ArrowDown':
                 if (dy !== -1) {
                     dx = 0;
                     dy = 1;
+                    if (currentDirection !== 'down') { playArrowSound(); }
+                    currentDirection = 'down';
                 }
                 break;
             case 'ArrowLeft':
                 if (dx !== 1) {
                     dx = -1;
                     dy = 0;
+                    if (currentDirection !== 'left') { playArrowSound(); }
+                    currentDirection = 'left';
                 }
                 break;
             case 'ArrowRight':
                 if (dx !== -1) {
                     dx = 1;
                     dy = 0;
+                    if (currentDirection !== 'right') { playArrowSound(); }
+                    currentDirection = 'right';
                 }
                 break;
         }
     });
 
+    function playArrowSound() {
+        arrowSound.currentTime = 0; // Reset the playback position to the beginning
+        arrowSound.play();
+    }
     function updateScore() {
         scoreElement.textContent = score;
     }

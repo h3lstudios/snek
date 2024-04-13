@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEK</title>
+    <link rel="stylesheet" href="style.css">
+    <audio id="sound1" src="assets/b1-023_menu-ok_01.mp3" preload="auto"></audio>
+</head>
+<body>
+<div id="title">
+   <Center> <img src="assets/logo.png" alt="Game Title"></Center>
+</div>
+<div id="options">
+    <button class="option" onclick="startGame()">Time Trial</button>
+    <button class="option" onclick="showInstructions()">Speedrun</button>
+    <button class="option" onclick="showSettings()">26A</button>
+</div>
+
+<script type="text/javascript">
+    const audio = new Audio("assets/b1-023_menu-ok_01.mp3");
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            audio.play();
+        });
+    });
+
+</script>
+</body>
+</html>

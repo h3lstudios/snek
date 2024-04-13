@@ -3,28 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Kode+Mono:wght@400..700&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>Snake Game</title>
+    <title>SNEK</title>
+    <link rel="stylesheet" href="style.css">
+    <audio id="sound1" src="assets/b1-023_menu-ok_01.mp3" preload="auto"></audio>
     <style>
-        /* CSS styles for the game canvas */
-        canvas {
-            border: 1px solid #ffffff;
-            grid-row: 1;
-            grid-column: 1;
-            color: white;
-            background-color: black;
+        #page-container {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .page-previous {
+            transform: translateX(-100%);
+        }
+
+        .page-next {
+            transform: translateX(100%);
         }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="canvas-container">
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <div id="scoreDisplay">Score: <span id="scoreValue">0</span></div>
+<div id="page-container">
+    <div id="title">
+        <center><img src="assets/logo.png" alt="Game Title"></center>
+    </div>
+    <div id="options">
+        <button class="option" onclick="loadPage('play.html')">Play</button>
+        <button class="option" onclick="loadPage('options.html')">Options</button>
+        <button class="option" onclick="loadPage('multiplayer.html')">Multiplayer</button>
+        <button class="option" onclick="loadPage('settings.html')">Settings</button>
+        <button class="option" onclick="loadPage('leaderboards.html')">Leaderboards</button>
+        <button class="option" onclick="loadPage('account.html')">Account</button>
+    </div>
 </div>
-<img src="apple.png" id="appleImage" style="display: none;">
-<script src="mechanics.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const audio = new Audio("assets/b1-023_menu-ok_01.mp3");
+        const buttons = document.querySelectorAll("button");
+        const pageContainer = document.getElementById("page-container");
+
+        function loadPage(href) {
+            // Create a new page container for the incoming page
+            const newContainer = document.createElement('div');
+            newContainer.innerHTML = "Loading..."; // Display a loading message
+
+            // Apply classes for the slide effect
+            pageContainer.classList.add('page-previous');
+            newContainer.classList.add('page-next');
+
+            // Insert the new container after the current container
+            pageContainer.insertAdjacentElement('afterend', newContainer);
+
+            // Fetch the new page content
+            fetch(href)
+                .then(response => response.text())
+                .then(content => {
+                    // Update the new container with the new content
+                    newContainer.innerHTML = content;
+
+                    // Wait for the transition to complete
+                    setTimeout(() => {
+                        // Remove the previous container
+                        pageContainer.remove();
+
+                        // Remove classes for the slide effect
+                        newContainer.classList.remove('page-next');
+                    }, 300); // Adjust the delay to match the CSS transition duration
+
+                    // Play the audio
+                    audio.play();
+                });
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener("click", event => {
+                event.preventDefault();
+                const href = button.getAttribute('data-href');
+                loadPage(href);
+            });
+        });
+    });
+</script>
 </body>
 </html>
